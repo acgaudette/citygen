@@ -13,6 +13,12 @@ macro_rules! expand_container {
     }
 }
 
+#[derive(Copy, Clone)]
+struct Road {
+    angle: f32,
+    length: f32,
+}
+
 struct App {
     camera: Option<entity::Handle>,
     last_angle: Vec2,
