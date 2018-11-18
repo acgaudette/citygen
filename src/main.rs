@@ -19,6 +19,12 @@ struct Road {
     length: f32,
 }
 
+#[derive(Copy, Clone)]
+struct Query {
+    origin: Vec2,
+    prev_angle: f32,
+}
+
 struct App {
     camera: Option<entity::Handle>,
     last_angle: Vec2,
