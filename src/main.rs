@@ -25,6 +25,15 @@ struct Query {
     prev_angle: f32,
 }
 
+#[derive(Copy, Clone)]
+struct RoadQuery {
+    timer: usize,
+    lifetime: usize,
+    road: Road,
+    query: Query,
+    valid: bool,
+}
+
 struct App {
     camera: Option<entity::Handle>,
     last_angle: Vec2,
