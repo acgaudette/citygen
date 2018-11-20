@@ -19,6 +19,25 @@ struct Road {
     length: f32,
 }
 
+impl Road {
+    fn end(self, query: Query) -> Vec2 {
+        let angle = self.angle
+            * std::f32::consts::PI
+            / 180.0;
+
+        let direction = Vec2::new(
+            (query.prev_angle + angle).sin(),
+            (query.prev_angle + angle).cos(),
+        ).norm();
+
+        let end = query.origin
+            + direction
+            * self.length;
+
+        end
+    }
+}
+
 #[derive(Copy, Clone)]
 struct Query {
     origin: Vec2,
