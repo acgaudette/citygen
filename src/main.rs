@@ -65,6 +65,41 @@ fn check_local(rq: RoadQuery, lines: &Vec<Line>) -> bool {
     true
 }
 
+fn gen_global(t: usize, l: usize, road: Road, query: Query)
+    -> (RoadQuery, RoadQuery, RoadQuery)
+{
+    let prev_angle = query.prev_angle
+        + road.angle * std::f32::consts::PI
+            / 180.0;
+
+    let make_road = |angle, offset, lt, len| {
+        RoadQuery {
+            timer: offset,
+            lifetime: lt,
+            road: Road {
+                angle,
+                length: len,
+            },
+            query: Query {
+                origin: road.end(query),
+                prev_angle,
+            },
+            valid: lt < 16,
+        }
+    };
+
+    let angle = {
+        let r = rand::random::<f32>();
+        (r * 90.0) - 45.0
+    };
+
+    let a = make_road(angle - 90.0, t + 64, l + 3, 0.4);
+    let b = make_road(angle, 1, l + 1, 0.5); // Highway
+    let c = make_road(angle + 90.0, t + 64, l + 3, 0.4);
+
+    (a, b, c)
+}
+
 #[derive(Copy, Clone)]
 struct Road {
     angle: f32,
