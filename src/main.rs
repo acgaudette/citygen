@@ -44,6 +44,27 @@ fn new_segment(road: Road, query: Query) -> Line {
     )
 }
 
+fn check_local(rq: RoadQuery, lines: &Vec<Line>) -> bool {
+    if !rq.valid { return false }
+
+    let start = rq.query.origin;
+    let end = rq.road.end(rq.query);
+
+    let this = Line::new(
+        Vec3::new(start.x, 0.0, start.y),
+        Vec3::new(end.x, 0.0, end.y),
+    );
+
+    // Check for intersection
+    for i in 0..lines.len() {
+        if intersects(this, lines[i]) {
+            return false
+        }
+    }
+
+    true
+}
+
 #[derive(Copy, Clone)]
 struct Road {
     angle: f32,
