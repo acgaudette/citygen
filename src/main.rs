@@ -55,6 +55,29 @@ struct RoadQuery {
     valid: bool,
 }
 
+impl Ord for RoadQuery{
+    fn cmp(&self, other: &RoadQuery)
+    -> std::cmp::Ordering {
+        // Proper timer ordering
+        other.timer.cmp(&self.timer)
+    }
+}
+
+impl PartialOrd for RoadQuery {
+    fn partial_cmp(&self, other: &RoadQuery)
+    -> Option<std::cmp::Ordering> {
+        Some(self.cmp(other))
+    }
+}
+
+impl PartialEq for RoadQuery {
+    fn eq(&self, other: &RoadQuery) -> bool {
+        self.timer == other.timer
+    }
+}
+
+impl Eq for RoadQuery {}
+
 struct App {
     camera: Option<entity::Handle>,
     last_angle: Vec2,
