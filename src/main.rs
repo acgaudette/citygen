@@ -15,6 +15,25 @@ macro_rules! expand_container {
     }
 }
 
+// Assume 2D segment with y = 0
+fn intersects(a: Line, b: Line) -> bool {
+    let compare = a.end - a.start;
+
+    let vs = b.start - a.start;
+    let o1 = vs.cross(compare).y;
+    let vs = b.end - a.start;
+    let o2 = vs.cross(compare).y;
+
+    let compare = b.end - b.start;
+
+    let vs = a.start - b.start;
+    let t1 = vs.cross(compare).y;
+    let vs = a.end - b.start;
+    let t2 = vs.cross(compare).y;
+
+    o1 * o2 < 0.0 && t1 * t2 < 0.0
+}
+
 fn new_segment(road: Road, query: Query) -> Line {
     let start = query.origin;
     let end = road.end(query);
