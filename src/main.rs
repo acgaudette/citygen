@@ -4,6 +4,8 @@ use self::engine::alg::*;
 use self::engine::graphics::*;
 use self::engine::components::*;
 
+extern crate rand;
+
 default_traits!(App, [engine::FixedUpdate, components::softbody::Iterate]);
 
 #[macro_use]
