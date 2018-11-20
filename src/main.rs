@@ -165,6 +165,29 @@ fn update(
     if input.key_held(input::Key::Up)   { self.fov -= 2.0; }
     if input.key_held(input::Key::Down) { self.fov += 2.0; }
     cameras.set_fov(self.camera.unwrap(), self.fov);
+
+    /* City-gen line drawing */
+
+    debug.clear_lines();
+
+    let line_count = self.lines.len();
+    for (i, line) in self.lines.iter().enumerate() {
+        debug.add_line(
+            *line, Color::cyan()
+                * (
+                    1.0 - (i as f32 / line_count as f32)
+                    + 0.1
+                )
+        );
+    }
+
+    debug.add_local_axes(
+        Vec3::zero(),
+        Vec3::fwd(),
+        Vec3::up(),
+        1.0,
+        0.5,
+    );
 } }
 
 fn main() {
