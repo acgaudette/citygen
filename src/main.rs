@@ -109,6 +109,24 @@ fn start(
     transforms.register(camera);
     cameras.register(camera);
     self.camera = Some(camera);
+
+    /* City-gen algorithm: init */
+
+    let initial_query = RoadQuery {
+        timer: 0,
+        lifetime: 0,
+        road: Road {
+            angle: 45.0,
+            length: 0.5,
+        },
+        query: Query {
+            origin: Vec2::zero(),
+            prev_angle: 0.0,
+        },
+        valid: true,
+    };
+
+    self.q.push(initial_query);
 } }
 
 impl engine::Update for App {
