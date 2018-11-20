@@ -15,6 +15,16 @@ macro_rules! expand_container {
     }
 }
 
+fn new_segment(road: Road, query: Query) -> Line {
+    let start = query.origin;
+    let end = road.end(query);
+
+    Line::new(
+        Vec3::new(start.x, 0.0, start.y),
+        Vec3::new(end.x, 0.0, end.y),
+    )
+}
+
 #[derive(Copy, Clone)]
 struct Road {
     angle: f32,
