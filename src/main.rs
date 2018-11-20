@@ -127,6 +127,34 @@ fn start(
     };
 
     self.q.push(initial_query);
+
+    /* City-gen algorithm */
+
+    while !self.q.is_empty() {
+        let rq = self.q.pop().unwrap();
+
+        // Check local constraints
+        if !check_local(rq, &self.lines) { continue }
+
+        // Add real segment
+        self.lines.push(
+            // Compute real segment from query
+            new_segment(rq.road, rq.query)
+        );
+
+        // Generate road queries
+        let (a, b, c) = gen_global(
+            rq.timer,
+            rq.lifetime,
+            rq.road,
+            rq.query,
+        );
+
+        // Add road queries back to q
+        self.q.push(a);
+        self.q.push(b);
+        self.q.push(c);
+    }
 } }
 
 impl engine::Update for App {
