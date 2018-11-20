@@ -82,6 +82,11 @@ struct App {
     camera: Option<entity::Handle>,
     last_angle: Vec2,
     fov: f32,
+
+    /* City-gen params */
+
+    q: std::collections::BinaryHeap<RoadQuery>,
+    lines: Vec<Line>,
 }
 
 impl engine::Start for App {
@@ -167,6 +172,12 @@ fn main() {
         camera: None,
         last_angle: Vec2::zero(),
         fov: 60.0,
+
+        /* City-gen params */
+
+        q: std::collections::BinaryHeap
+            ::with_capacity(1),
+        lines: Vec::with_capacity(1024),
     };
 
     engine::go(vec![], app);
