@@ -1,0 +1,6 @@
+*.swp
+*.spv
+*.spvasm
+/target/
+**/*.rs.bk
+Cargo.lock
