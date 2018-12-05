@@ -1,0 +1,7 @@
+[package]
+name = "citygen"
+version = "0.1.0"
+authors = ["Aaron C Gaudette <acg@aaronsee.media>"]
+
+[dependencies]
+nmg_vulkan = { git = "https://github.com/acgaudette/nmg-vulkan" }
