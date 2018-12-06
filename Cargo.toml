@@ -5,3 +5,4 @@ authors = ["Aaron C Gaudette <acg@aaronsee.media>"]
 
 [dependencies]
 nmg_vulkan = { git = "https://github.com/acgaudette/nmg-vulkan" }
+rand = "0.5.5"
